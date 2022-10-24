@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Литература</h1>
+    <hr>
+    {% for books in books %}
+    <h2><a href="{% url 'books_detail' books.pk%}">{{books.title}}</a></h2>
+    <small>
+        {{books.author}} |&nbsp;
+        Категории: &nbsp;
+        {% for categories in books.categories.all %}
+        <a href="{% url 'books_category'  categories.name_of_category %}">
+                {{categories.name_of_category}}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ books.description | slice:":400" }}...</p>
+    {% endfor %}
+</div>
+{% endblock %}
